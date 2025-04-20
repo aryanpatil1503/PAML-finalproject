@@ -1,0 +1,13 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.pyc
+
+# Data folders
+data/processed/
+models/
+
+# Virtual environment
+env/
+
+# macOS
+.DS_Store
