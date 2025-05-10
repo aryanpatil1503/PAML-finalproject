@@ -1,0 +1,435 @@
+2025-04-27 15:53:17,640 - __main__ - INFO - Starting preprocessing pipeline
+2025-04-27 15:53:17,640 - __main__ - INFO - Loading raw data
+2025-04-27 15:53:17,649 - __main__ - INFO - Analyzing training data
+2025-04-27 15:53:17,650 - __main__ - INFO - Dataset shape: (5000, 8)
+2025-04-27 15:53:17,653 - __main__ - INFO - Class distribution:
+readmitted
+0    4060
+1     940
+Name: count, dtype: int64
+2025-04-27 15:53:17,653 - __main__ - INFO - Class imbalance ratio: 4.32
+2025-04-27 15:53:17,813 - matplotlib.category - INFO - Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+2025-04-27 15:53:17,819 - matplotlib.category - INFO - Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+2025-04-27 15:53:17,895 - __main__ - INFO - Analyzing test data
+2025-04-27 15:53:17,895 - __main__ - INFO - Dataset shape: (2000, 7)
+2025-04-27 15:53:17,895 - __main__ - INFO - Analyzing feature correlations
+2025-04-27 15:53:18,014 - __main__ - INFO - Preprocessing training data
+2025-04-27 15:53:18,049 - __main__ - ERROR - Error during preprocessing: 'super' object has no attribute '__sklearn_tags__'
+Traceback (most recent call last):
+  File "/Users/aryansunilpatil/PAML Assignments/final project/src/data/run_preprocessing.py", line 100, in main
+    train_proc, preprocessor = preprocess(
+  File "/Users/aryansunilpatil/PAML Assignments/final project/src/data/preprocess.py", line 235, in preprocess
+    arr = preprocessor.fit_transform(df, y)
+  File "/Users/aryansunilpatil/PAML Assignments/final project/venv/lib/python3.9/site-packages/sklearn/base.py", line 1389, in wrapper
+    return fit_method(estimator, *args, **kwargs)
+  File "/Users/aryansunilpatil/PAML Assignments/final project/venv/lib/python3.9/site-packages/sklearn/pipeline.py", line 718, in fit_transform
+    Xt = self._fit(X, y, routed_params)
+  File "/Users/aryansunilpatil/PAML Assignments/final project/venv/lib/python3.9/site-packages/sklearn/pipeline.py", line 588, in _fit
+    X, fitted_transformer = fit_transform_one_cached(
+  File "/Users/aryansunilpatil/PAML Assignments/final project/venv/lib/python3.9/site-packages/joblib/memory.py", line 312, in __call__
+    return self.func(*args, **kwargs)
+  File "/Users/aryansunilpatil/PAML Assignments/final project/venv/lib/python3.9/site-packages/sklearn/pipeline.py", line 1551, in _fit_transform_one
+    res = transformer.fit_transform(X, y, **params.get("fit_transform", {}))
+  File "/Users/aryansunilpatil/PAML Assignments/final project/venv/lib/python3.9/site-packages/sklearn/utils/_set_output.py", line 319, in wrapped
+    data_to_wrap = f(self, X, *args, **kwargs)
+  File "/Users/aryansunilpatil/PAML Assignments/final project/venv/lib/python3.9/site-packages/sklearn/base.py", line 1389, in wrapper
+    return fit_method(estimator, *args, **kwargs)
+  File "/Users/aryansunilpatil/PAML Assignments/final project/venv/lib/python3.9/site-packages/sklearn/compose/_column_transformer.py", line 1001, in fit_transform
+    result = self._call_func_on_transformers(
+  File "/Users/aryansunilpatil/PAML Assignments/final project/venv/lib/python3.9/site-packages/sklearn/compose/_column_transformer.py", line 910, in _call_func_on_transformers
+    return Parallel(n_jobs=self.n_jobs)(jobs)
+  File "/Users/aryansunilpatil/PAML Assignments/final project/venv/lib/python3.9/site-packages/sklearn/utils/parallel.py", line 77, in __call__
+    return super().__call__(iterable_with_config)
+  File "/Users/aryansunilpatil/PAML Assignments/final project/venv/lib/python3.9/site-packages/joblib/parallel.py", line 1918, in __call__
+    return output if self.return_generator else list(output)
+  File "/Users/aryansunilpatil/PAML Assignments/final project/venv/lib/python3.9/site-packages/joblib/parallel.py", line 1847, in _get_sequential_output
+    res = func(*args, **kwargs)
+  File "/Users/aryansunilpatil/PAML Assignments/final project/venv/lib/python3.9/site-packages/sklearn/utils/parallel.py", line 139, in __call__
+    return self.function(*args, **kwargs)
+  File "/Users/aryansunilpatil/PAML Assignments/final project/venv/lib/python3.9/site-packages/sklearn/pipeline.py", line 1551, in _fit_transform_one
+    res = transformer.fit_transform(X, y, **params.get("fit_transform", {}))
+  File "/Users/aryansunilpatil/PAML Assignments/final project/venv/lib/python3.9/site-packages/sklearn/base.py", line 1389, in wrapper
+    return fit_method(estimator, *args, **kwargs)
+  File "/Users/aryansunilpatil/PAML Assignments/final project/venv/lib/python3.9/site-packages/sklearn/pipeline.py", line 730, in fit_transform
+    return last_step.fit_transform(
+  File "/Users/aryansunilpatil/PAML Assignments/final project/venv/lib/python3.9/site-packages/sklearn/utils/_set_output.py", line 319, in wrapped
+    data_to_wrap = f(self, X, *args, **kwargs)
+  File "/Users/aryansunilpatil/PAML Assignments/final project/venv/lib/python3.9/site-packages/category_encoders/utils.py", line 474, in fit_transform
+    return self.fit(X, y, **fit_params).transform(X, y)
+  File "/Users/aryansunilpatil/PAML Assignments/final project/venv/lib/python3.9/site-packages/category_encoders/utils.py", line 299, in fit
+    self._check_fit_inputs(X, y)
+  File "/Users/aryansunilpatil/PAML Assignments/final project/venv/lib/python3.9/site-packages/category_encoders/utils.py", line 336, in _check_fit_inputs
+    if self._get_tags().get('supervised_encoder'):
+  File "/Users/aryansunilpatil/PAML Assignments/final project/venv/lib/python3.9/site-packages/sklearn/base.py", line 417, in _get_tags
+    return _to_old_tags(get_tags(self))
+  File "/Users/aryansunilpatil/PAML Assignments/final project/venv/lib/python3.9/site-packages/sklearn/utils/_tags.py", line 430, in get_tags
+    sklearn_tags_provider[klass] = klass.__sklearn_tags__(estimator)  # type: ignore[attr-defined]
+  File "/Users/aryansunilpatil/PAML Assignments/final project/venv/lib/python3.9/site-packages/sklearn/base.py", line 859, in __sklearn_tags__
+    tags = super().__sklearn_tags__()
+AttributeError: 'super' object has no attribute '__sklearn_tags__'
+2025-04-27 15:56:25,236 - __main__ - INFO - Starting preprocessing pipeline
+2025-04-27 15:56:25,237 - __main__ - INFO - Loading raw data
+2025-04-27 15:56:25,245 - __main__ - INFO - Analyzing training data
+2025-04-27 15:56:25,245 - __main__ - INFO - Dataset shape: (5000, 8)
+2025-04-27 15:56:25,249 - __main__ - INFO - Class distribution:
+readmitted
+0    4060
+1     940
+Name: count, dtype: int64
+2025-04-27 15:56:25,249 - __main__ - INFO - Class imbalance ratio: 4.32
+2025-04-27 15:56:25,413 - matplotlib.category - INFO - Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+2025-04-27 15:56:25,419 - matplotlib.category - INFO - Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+2025-04-27 15:56:25,491 - __main__ - INFO - Analyzing test data
+2025-04-27 15:56:25,491 - __main__ - INFO - Dataset shape: (2000, 7)
+2025-04-27 15:56:25,492 - __main__ - INFO - Analyzing feature correlations
+2025-04-27 15:56:25,609 - __main__ - INFO - Preprocessing training data
+2025-04-27 15:56:25,644 - __main__ - ERROR - Error during preprocessing: 'super' object has no attribute '__sklearn_tags__'
+Traceback (most recent call last):
+  File "/Users/aryansunilpatil/PAML Assignments/final project/src/data/run_preprocessing.py", line 100, in main
+    train_proc, preprocessor = preprocess(
+  File "/Users/aryansunilpatil/PAML Assignments/final project/src/data/preprocess.py", line 241, in preprocess
+    arr = preprocessor.fit_transform(df, y)
+  File "/Users/aryansunilpatil/PAML Assignments/final project/venv/lib/python3.9/site-packages/sklearn/base.py", line 1389, in wrapper
+    return fit_method(estimator, *args, **kwargs)
+  File "/Users/aryansunilpatil/PAML Assignments/final project/venv/lib/python3.9/site-packages/sklearn/pipeline.py", line 718, in fit_transform
+    Xt = self._fit(X, y, routed_params)
+  File "/Users/aryansunilpatil/PAML Assignments/final project/venv/lib/python3.9/site-packages/sklearn/pipeline.py", line 588, in _fit
+    X, fitted_transformer = fit_transform_one_cached(
+  File "/Users/aryansunilpatil/PAML Assignments/final project/venv/lib/python3.9/site-packages/joblib/memory.py", line 312, in __call__
+    return self.func(*args, **kwargs)
+  File "/Users/aryansunilpatil/PAML Assignments/final project/venv/lib/python3.9/site-packages/sklearn/pipeline.py", line 1551, in _fit_transform_one
+    res = transformer.fit_transform(X, y, **params.get("fit_transform", {}))
+  File "/Users/aryansunilpatil/PAML Assignments/final project/venv/lib/python3.9/site-packages/sklearn/utils/_set_output.py", line 319, in wrapped
+    data_to_wrap = f(self, X, *args, **kwargs)
+  File "/Users/aryansunilpatil/PAML Assignments/final project/venv/lib/python3.9/site-packages/sklearn/base.py", line 1389, in wrapper
+    return fit_method(estimator, *args, **kwargs)
+  File "/Users/aryansunilpatil/PAML Assignments/final project/venv/lib/python3.9/site-packages/sklearn/compose/_column_transformer.py", line 1001, in fit_transform
+    result = self._call_func_on_transformers(
+  File "/Users/aryansunilpatil/PAML Assignments/final project/venv/lib/python3.9/site-packages/sklearn/compose/_column_transformer.py", line 910, in _call_func_on_transformers
+    return Parallel(n_jobs=self.n_jobs)(jobs)
+  File "/Users/aryansunilpatil/PAML Assignments/final project/venv/lib/python3.9/site-packages/sklearn/utils/parallel.py", line 77, in __call__
+    return super().__call__(iterable_with_config)
+  File "/Users/aryansunilpatil/PAML Assignments/final project/venv/lib/python3.9/site-packages/joblib/parallel.py", line 1918, in __call__
+    return output if self.return_generator else list(output)
+  File "/Users/aryansunilpatil/PAML Assignments/final project/venv/lib/python3.9/site-packages/joblib/parallel.py", line 1847, in _get_sequential_output
+    res = func(*args, **kwargs)
+  File "/Users/aryansunilpatil/PAML Assignments/final project/venv/lib/python3.9/site-packages/sklearn/utils/parallel.py", line 139, in __call__
+    return self.function(*args, **kwargs)
+  File "/Users/aryansunilpatil/PAML Assignments/final project/venv/lib/python3.9/site-packages/sklearn/pipeline.py", line 1551, in _fit_transform_one
+    res = transformer.fit_transform(X, y, **params.get("fit_transform", {}))
+  File "/Users/aryansunilpatil/PAML Assignments/final project/venv/lib/python3.9/site-packages/sklearn/base.py", line 1389, in wrapper
+    return fit_method(estimator, *args, **kwargs)
+  File "/Users/aryansunilpatil/PAML Assignments/final project/venv/lib/python3.9/site-packages/sklearn/pipeline.py", line 730, in fit_transform
+    return last_step.fit_transform(
+  File "/Users/aryansunilpatil/PAML Assignments/final project/venv/lib/python3.9/site-packages/sklearn/utils/_set_output.py", line 319, in wrapped
+    data_to_wrap = f(self, X, *args, **kwargs)
+  File "/Users/aryansunilpatil/PAML Assignments/final project/venv/lib/python3.9/site-packages/category_encoders/utils.py", line 474, in fit_transform
+    return self.fit(X, y, **fit_params).transform(X, y)
+  File "/Users/aryansunilpatil/PAML Assignments/final project/venv/lib/python3.9/site-packages/category_encoders/utils.py", line 299, in fit
+    self._check_fit_inputs(X, y)
+  File "/Users/aryansunilpatil/PAML Assignments/final project/venv/lib/python3.9/site-packages/category_encoders/utils.py", line 336, in _check_fit_inputs
+    if self._get_tags().get('supervised_encoder'):
+  File "/Users/aryansunilpatil/PAML Assignments/final project/venv/lib/python3.9/site-packages/sklearn/base.py", line 417, in _get_tags
+    return _to_old_tags(get_tags(self))
+  File "/Users/aryansunilpatil/PAML Assignments/final project/venv/lib/python3.9/site-packages/sklearn/utils/_tags.py", line 430, in get_tags
+    sklearn_tags_provider[klass] = klass.__sklearn_tags__(estimator)  # type: ignore[attr-defined]
+  File "/Users/aryansunilpatil/PAML Assignments/final project/venv/lib/python3.9/site-packages/sklearn/base.py", line 859, in __sklearn_tags__
+    tags = super().__sklearn_tags__()
+AttributeError: 'super' object has no attribute '__sklearn_tags__'
+2025-04-27 16:16:41,483 - __main__ - INFO - Starting preprocessing pipeline
+2025-04-27 16:16:41,483 - __main__ - INFO - Loading raw data
+2025-04-27 16:16:41,493 - __main__ - INFO - Analyzing training data
+2025-04-27 16:16:41,493 - __main__ - INFO - Dataset shape: (5000, 8)
+2025-04-27 16:16:41,496 - __main__ - INFO - Class distribution:
+readmitted
+0    4060
+1     940
+Name: count, dtype: int64
+2025-04-27 16:16:41,496 - __main__ - INFO - Class imbalance ratio: 4.32
+2025-04-27 16:16:41,659 - matplotlib.category - INFO - Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+2025-04-27 16:16:41,666 - matplotlib.category - INFO - Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+2025-04-27 16:16:41,740 - __main__ - INFO - Analyzing test data
+2025-04-27 16:16:41,740 - __main__ - INFO - Dataset shape: (2000, 7)
+2025-04-27 16:16:41,741 - __main__ - INFO - Analyzing feature correlations
+2025-04-27 16:16:41,859 - __main__ - INFO - Preprocessing training data
+2025-04-27 16:16:41,883 - __main__ - ERROR - Error during preprocessing: 'dict' object has no attribute 'input_tags'
+Traceback (most recent call last):
+  File "/Users/aryansunilpatil/PAML Assignments/final project/src/data/run_preprocessing.py", line 100, in main
+    train_proc, preprocessor = preprocess(
+  File "/Users/aryansunilpatil/PAML Assignments/final project/src/data/preprocess.py", line 273, in preprocess
+    arr = preprocessor.fit_transform(df, y)
+  File "/Users/aryansunilpatil/PAML Assignments/final project/venv/lib/python3.9/site-packages/sklearn/base.py", line 1389, in wrapper
+    return fit_method(estimator, *args, **kwargs)
+  File "/Users/aryansunilpatil/PAML Assignments/final project/venv/lib/python3.9/site-packages/sklearn/pipeline.py", line 718, in fit_transform
+    Xt = self._fit(X, y, routed_params)
+  File "/Users/aryansunilpatil/PAML Assignments/final project/venv/lib/python3.9/site-packages/sklearn/pipeline.py", line 588, in _fit
+    X, fitted_transformer = fit_transform_one_cached(
+  File "/Users/aryansunilpatil/PAML Assignments/final project/venv/lib/python3.9/site-packages/joblib/memory.py", line 312, in __call__
+    return self.func(*args, **kwargs)
+  File "/Users/aryansunilpatil/PAML Assignments/final project/venv/lib/python3.9/site-packages/sklearn/pipeline.py", line 1551, in _fit_transform_one
+    res = transformer.fit_transform(X, y, **params.get("fit_transform", {}))
+  File "/Users/aryansunilpatil/PAML Assignments/final project/venv/lib/python3.9/site-packages/sklearn/utils/_set_output.py", line 319, in wrapped
+    data_to_wrap = f(self, X, *args, **kwargs)
+  File "/Users/aryansunilpatil/PAML Assignments/final project/venv/lib/python3.9/site-packages/sklearn/base.py", line 1389, in wrapper
+    return fit_method(estimator, *args, **kwargs)
+  File "/Users/aryansunilpatil/PAML Assignments/final project/venv/lib/python3.9/site-packages/sklearn/compose/_column_transformer.py", line 1001, in fit_transform
+    result = self._call_func_on_transformers(
+  File "/Users/aryansunilpatil/PAML Assignments/final project/venv/lib/python3.9/site-packages/sklearn/compose/_column_transformer.py", line 910, in _call_func_on_transformers
+    return Parallel(n_jobs=self.n_jobs)(jobs)
+  File "/Users/aryansunilpatil/PAML Assignments/final project/venv/lib/python3.9/site-packages/sklearn/utils/parallel.py", line 77, in __call__
+    return super().__call__(iterable_with_config)
+  File "/Users/aryansunilpatil/PAML Assignments/final project/venv/lib/python3.9/site-packages/joblib/parallel.py", line 1918, in __call__
+    return output if self.return_generator else list(output)
+  File "/Users/aryansunilpatil/PAML Assignments/final project/venv/lib/python3.9/site-packages/joblib/parallel.py", line 1847, in _get_sequential_output
+    res = func(*args, **kwargs)
+  File "/Users/aryansunilpatil/PAML Assignments/final project/venv/lib/python3.9/site-packages/sklearn/utils/parallel.py", line 139, in __call__
+    return self.function(*args, **kwargs)
+  File "/Users/aryansunilpatil/PAML Assignments/final project/venv/lib/python3.9/site-packages/sklearn/pipeline.py", line 1551, in _fit_transform_one
+    res = transformer.fit_transform(X, y, **params.get("fit_transform", {}))
+  File "/Users/aryansunilpatil/PAML Assignments/final project/venv/lib/python3.9/site-packages/sklearn/base.py", line 1389, in wrapper
+    return fit_method(estimator, *args, **kwargs)
+  File "/Users/aryansunilpatil/PAML Assignments/final project/venv/lib/python3.9/site-packages/sklearn/pipeline.py", line 718, in fit_transform
+    Xt = self._fit(X, y, routed_params)
+  File "/Users/aryansunilpatil/PAML Assignments/final project/venv/lib/python3.9/site-packages/sklearn/pipeline.py", line 588, in _fit
+    X, fitted_transformer = fit_transform_one_cached(
+  File "/Users/aryansunilpatil/PAML Assignments/final project/venv/lib/python3.9/site-packages/joblib/memory.py", line 312, in __call__
+    return self.func(*args, **kwargs)
+  File "/Users/aryansunilpatil/PAML Assignments/final project/venv/lib/python3.9/site-packages/sklearn/pipeline.py", line 1551, in _fit_transform_one
+    res = transformer.fit_transform(X, y, **params.get("fit_transform", {}))
+  File "/Users/aryansunilpatil/PAML Assignments/final project/venv/lib/python3.9/site-packages/sklearn/utils/_set_output.py", line 319, in wrapped
+    data_to_wrap = f(self, X, *args, **kwargs)
+  File "/Users/aryansunilpatil/PAML Assignments/final project/venv/lib/python3.9/site-packages/sklearn/base.py", line 921, in fit_transform
+    return self.fit(X, y, **fit_params).transform(X)
+  File "/Users/aryansunilpatil/PAML Assignments/final project/venv/lib/python3.9/site-packages/sklearn/base.py", line 1389, in wrapper
+    return fit_method(estimator, *args, **kwargs)
+  File "/Users/aryansunilpatil/PAML Assignments/final project/venv/lib/python3.9/site-packages/sklearn/impute/_knn.py", line 237, in fit
+    X = validate_data(
+  File "/Users/aryansunilpatil/PAML Assignments/final project/venv/lib/python3.9/site-packages/sklearn/utils/validation.py", line 2920, in validate_data
+    tags = get_tags(_estimator)
+  File "/Users/aryansunilpatil/PAML Assignments/final project/venv/lib/python3.9/site-packages/sklearn/utils/_tags.py", line 398, in get_tags
+    tags = estimator.__sklearn_tags__()
+  File "/Users/aryansunilpatil/PAML Assignments/final project/venv/lib/python3.9/site-packages/sklearn/impute/_base.py", line 150, in __sklearn_tags__
+    tags.input_tags.allow_nan = is_scalar_nan(self.missing_values)
+AttributeError: 'dict' object has no attribute 'input_tags'
+2025-04-27 16:25:34,972 - __main__ - INFO - Starting preprocessing pipeline
+2025-04-27 16:25:34,972 - __main__ - INFO - Loading raw data
+2025-04-27 16:25:34,981 - __main__ - INFO - Analyzing training data
+2025-04-27 16:25:34,981 - __main__ - INFO - Dataset shape: (5000, 8)
+2025-04-27 16:25:34,984 - __main__ - INFO - Class distribution:
+readmitted
+0    4060
+1     940
+Name: count, dtype: int64
+2025-04-27 16:25:34,984 - __main__ - INFO - Class imbalance ratio: 4.32
+2025-04-27 16:25:35,152 - matplotlib.category - INFO - Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+2025-04-27 16:25:35,157 - matplotlib.category - INFO - Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+2025-04-27 16:25:35,234 - __main__ - INFO - Analyzing test data
+2025-04-27 16:25:35,234 - __main__ - INFO - Dataset shape: (2000, 7)
+2025-04-27 16:25:35,234 - __main__ - INFO - Analyzing feature correlations
+2025-04-27 16:25:35,357 - __main__ - INFO - Preprocessing training data
+2025-04-27 16:25:35,957 - __main__ - INFO - Preprocessing test data
+2025-04-27 16:25:35,957 - __main__ - ERROR - Error during preprocessing: Missing columns in dataframe: ['derived_log_comorbidity', 'derived_days_per_procedure', 'derived_age_risk', 'derived_age_comorbidity', 'derived_procedure_intensity', 'derived_risk_category']
+Traceback (most recent call last):
+  File "/Users/aryansunilpatil/PAML Assignments/final project/src/data/run_preprocessing.py", line 115, in main
+    test_proc, _ = preprocess(
+  File "/Users/aryansunilpatil/PAML Assignments/final project/src/data/preprocess.py", line 162, in preprocess
+    raise ValueError(f"Missing columns in dataframe: {missing_cols}")
+ValueError: Missing columns in dataframe: ['derived_log_comorbidity', 'derived_days_per_procedure', 'derived_age_risk', 'derived_age_comorbidity', 'derived_procedure_intensity', 'derived_risk_category']
+2025-04-27 16:29:48,770 - __main__ - INFO - Starting preprocessing pipeline
+2025-04-27 16:29:48,770 - __main__ - INFO - Loading raw data
+2025-04-27 16:29:48,779 - __main__ - INFO - Analyzing training data
+2025-04-27 16:29:48,779 - __main__ - INFO - Dataset shape: (5000, 8)
+2025-04-27 16:29:48,782 - __main__ - INFO - Class distribution:
+readmitted
+0    4060
+1     940
+Name: count, dtype: int64
+2025-04-27 16:29:48,782 - __main__ - INFO - Class imbalance ratio: 4.32
+2025-04-27 16:29:48,963 - matplotlib.category - INFO - Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+2025-04-27 16:29:48,969 - matplotlib.category - INFO - Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+2025-04-27 16:29:49,046 - __main__ - INFO - Analyzing test data
+2025-04-27 16:29:49,046 - __main__ - INFO - Dataset shape: (2000, 7)
+2025-04-27 16:29:49,047 - __main__ - INFO - Analyzing feature correlations
+2025-04-27 16:29:49,169 - __main__ - INFO - Preprocessing training data
+2025-04-27 16:29:49,768 - __main__ - INFO - Preprocessing test data
+2025-04-27 16:29:49,779 - __main__ - INFO - Processed training data shape: (5000, 10)
+2025-04-27 16:29:49,779 - __main__ - INFO - Processed test data shape: (2000, 10)
+2025-04-27 16:29:49,779 - __main__ - INFO - Saving processed data
+2025-04-27 16:29:49,835 - __main__ - INFO - Saving preprocessor
+2025-04-27 16:29:49,839 - __main__ - INFO - Preprocessing completed successfully
+2025-04-27 16:55:35,937 - __main__ - INFO - Starting preprocessing pipeline
+2025-04-27 16:55:35,937 - __main__ - INFO - Loading raw data
+2025-04-27 16:55:35,946 - __main__ - INFO - Analyzing training data
+2025-04-27 16:55:35,946 - __main__ - INFO - Dataset shape: (5000, 8)
+2025-04-27 16:55:35,950 - __main__ - INFO - Class distribution:
+readmitted
+0    4060
+1     940
+Name: count, dtype: int64
+2025-04-27 16:55:35,950 - __main__ - INFO - Class imbalance ratio: 4.32
+2025-04-27 16:55:36,147 - matplotlib.category - INFO - Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+2025-04-27 16:55:36,153 - matplotlib.category - INFO - Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+2025-04-27 16:55:36,228 - __main__ - INFO - Analyzing test data
+2025-04-27 16:55:36,228 - __main__ - INFO - Dataset shape: (2000, 7)
+2025-04-27 16:55:36,229 - __main__ - INFO - Analyzing feature correlations
+2025-04-27 16:55:36,351 - __main__ - INFO - Preprocessing training data
+2025-04-27 16:55:36,969 - __main__ - INFO - Preprocessing test data
+2025-04-27 16:55:36,980 - __main__ - INFO - Processed training data shape: (5000, 10)
+2025-04-27 16:55:36,980 - __main__ - INFO - Processed test data shape: (2000, 10)
+2025-04-27 16:55:36,980 - __main__ - INFO - Saving processed data
+2025-04-27 16:55:37,048 - __main__ - INFO - Saving preprocessor
+2025-04-27 16:55:37,052 - __main__ - INFO - Preprocessing completed successfully
+2025-04-27 17:52:28,993 - __main__ - INFO - Starting preprocessing pipeline
+2025-04-27 17:52:28,993 - __main__ - INFO - Loading raw data
+2025-04-27 17:52:29,003 - __main__ - INFO - Analyzing training data
+2025-04-27 17:52:29,003 - __main__ - INFO - Dataset shape: (5000, 8)
+2025-04-27 17:52:29,005 - __main__ - INFO - Class distribution:
+readmitted
+0    4060
+1     940
+Name: count, dtype: int64
+2025-04-27 17:52:29,006 - __main__ - INFO - Class imbalance ratio: 4.32
+2025-04-27 17:52:29,177 - matplotlib.category - INFO - Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+2025-04-27 17:52:29,182 - matplotlib.category - INFO - Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+2025-04-27 17:52:29,265 - __main__ - INFO - Analyzing test data
+2025-04-27 17:52:29,265 - __main__ - INFO - Dataset shape: (2000, 7)
+2025-04-27 17:52:29,266 - __main__ - INFO - Analyzing feature correlations
+2025-04-27 17:52:29,388 - __main__ - INFO - Preprocessing training data
+2025-04-27 17:52:29,432 - __main__ - ERROR - Error during preprocessing: could not convert string to float: 'Male'
+Traceback (most recent call last):
+  File "/Users/aryansunilpatil/PAML Assignments/final project/src/data/run_preprocessing.py", line 100, in main
+    train_proc, preprocessor = preprocess(
+  File "/Users/aryansunilpatil/PAML Assignments/final project/src/data/preprocess.py", line 174, in preprocess
+    arr = preprocessor.fit_transform(df)
+  File "/Users/aryansunilpatil/PAML Assignments/final project/venv/lib/python3.9/site-packages/sklearn/base.py", line 1389, in wrapper
+    return fit_method(estimator, *args, **kwargs)
+  File "/Users/aryansunilpatil/PAML Assignments/final project/venv/lib/python3.9/site-packages/sklearn/pipeline.py", line 730, in fit_transform
+    return last_step.fit_transform(
+  File "/Users/aryansunilpatil/PAML Assignments/final project/venv/lib/python3.9/site-packages/sklearn/utils/_set_output.py", line 319, in wrapped
+    data_to_wrap = f(self, X, *args, **kwargs)
+  File "/Users/aryansunilpatil/PAML Assignments/final project/venv/lib/python3.9/site-packages/sklearn/base.py", line 918, in fit_transform
+    return self.fit(X, **fit_params).transform(X)
+  File "/Users/aryansunilpatil/PAML Assignments/final project/venv/lib/python3.9/site-packages/sklearn/base.py", line 1389, in wrapper
+    return fit_method(estimator, *args, **kwargs)
+  File "/Users/aryansunilpatil/PAML Assignments/final project/venv/lib/python3.9/site-packages/sklearn/feature_selection/_univariate_selection.py", line 562, in fit
+    X = validate_data(self, X, accept_sparse=["csr", "csc"])
+  File "/Users/aryansunilpatil/PAML Assignments/final project/venv/lib/python3.9/site-packages/sklearn/utils/validation.py", line 2944, in validate_data
+    out = check_array(X, input_name="X", **check_params)
+  File "/Users/aryansunilpatil/PAML Assignments/final project/venv/lib/python3.9/site-packages/sklearn/utils/validation.py", line 1055, in check_array
+    array = _asarray_with_order(array, order=order, dtype=dtype, xp=xp)
+  File "/Users/aryansunilpatil/PAML Assignments/final project/venv/lib/python3.9/site-packages/sklearn/utils/_array_api.py", line 839, in _asarray_with_order
+    array = numpy.asarray(array, order=order, dtype=dtype)
+ValueError: could not convert string to float: 'Male'
+2025-04-27 17:56:24,198 - __main__ - INFO - Starting preprocessing pipeline
+2025-04-27 17:56:24,198 - __main__ - INFO - Loading raw data
+2025-04-27 17:56:24,208 - __main__ - INFO - Analyzing training data
+2025-04-27 17:56:24,208 - __main__ - INFO - Dataset shape: (5000, 8)
+2025-04-27 17:56:24,211 - __main__ - INFO - Class distribution:
+readmitted
+0    4060
+1     940
+Name: count, dtype: int64
+2025-04-27 17:56:24,212 - __main__ - INFO - Class imbalance ratio: 4.32
+2025-04-27 17:56:24,384 - matplotlib.category - INFO - Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+2025-04-27 17:56:24,390 - matplotlib.category - INFO - Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+2025-04-27 17:56:24,466 - __main__ - INFO - Analyzing test data
+2025-04-27 17:56:24,466 - __main__ - INFO - Dataset shape: (2000, 7)
+2025-04-27 17:56:24,466 - __main__ - INFO - Analyzing feature correlations
+2025-04-27 17:56:24,587 - __main__ - INFO - Preprocessing training data
+2025-04-27 17:56:24,631 - __main__ - ERROR - Error during preprocessing: Expected array-like (array or non-string sequence), got None
+Traceback (most recent call last):
+  File "/Users/aryansunilpatil/PAML Assignments/final project/src/data/run_preprocessing.py", line 100, in main
+    train_proc, preprocessor = preprocess(
+  File "/Users/aryansunilpatil/PAML Assignments/final project/src/data/preprocess.py", line 174, in preprocess
+    arr = preprocessor.fit_transform(df)
+  File "/Users/aryansunilpatil/PAML Assignments/final project/venv/lib/python3.9/site-packages/sklearn/base.py", line 1389, in wrapper
+    return fit_method(estimator, *args, **kwargs)
+  File "/Users/aryansunilpatil/PAML Assignments/final project/venv/lib/python3.9/site-packages/sklearn/pipeline.py", line 730, in fit_transform
+    return last_step.fit_transform(
+  File "/Users/aryansunilpatil/PAML Assignments/final project/venv/lib/python3.9/site-packages/sklearn/utils/_set_output.py", line 319, in wrapped
+    data_to_wrap = f(self, X, *args, **kwargs)
+  File "/Users/aryansunilpatil/PAML Assignments/final project/venv/lib/python3.9/site-packages/sklearn/base.py", line 918, in fit_transform
+    return self.fit(X, **fit_params).transform(X)
+  File "/Users/aryansunilpatil/PAML Assignments/final project/venv/lib/python3.9/site-packages/sklearn/base.py", line 1389, in wrapper
+    return fit_method(estimator, *args, **kwargs)
+  File "/Users/aryansunilpatil/PAML Assignments/final project/venv/lib/python3.9/site-packages/sklearn/feature_selection/_univariate_selection.py", line 569, in fit
+    score_func_ret = self.score_func(X, y)
+  File "/Users/aryansunilpatil/PAML Assignments/final project/venv/lib/python3.9/site-packages/sklearn/utils/_param_validation.py", line 189, in wrapper
+    return func(*args, **kwargs)
+  File "/Users/aryansunilpatil/PAML Assignments/final project/venv/lib/python3.9/site-packages/sklearn/feature_selection/_mutual_info.py", line 570, in mutual_info_classif
+    check_classification_targets(y)
+  File "/Users/aryansunilpatil/PAML Assignments/final project/venv/lib/python3.9/site-packages/sklearn/utils/multiclass.py", line 214, in check_classification_targets
+    y_type = type_of_target(y, input_name="y")
+  File "/Users/aryansunilpatil/PAML Assignments/final project/venv/lib/python3.9/site-packages/sklearn/utils/multiclass.py", line 325, in type_of_target
+    raise ValueError(
+ValueError: Expected array-like (array or non-string sequence), got None
+2025-04-27 17:58:24,034 - __main__ - INFO - Starting preprocessing pipeline
+2025-04-27 17:58:24,035 - __main__ - INFO - Loading raw data
+2025-04-27 17:58:24,044 - __main__ - INFO - Analyzing training data
+2025-04-27 17:58:24,044 - __main__ - INFO - Dataset shape: (5000, 8)
+2025-04-27 17:58:24,047 - __main__ - INFO - Class distribution:
+readmitted
+0    4060
+1     940
+Name: count, dtype: int64
+2025-04-27 17:58:24,048 - __main__ - INFO - Class imbalance ratio: 4.32
+2025-04-27 17:58:24,216 - matplotlib.category - INFO - Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+2025-04-27 17:58:24,222 - matplotlib.category - INFO - Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+2025-04-27 17:58:24,297 - __main__ - INFO - Analyzing test data
+2025-04-27 17:58:24,297 - __main__ - INFO - Dataset shape: (2000, 7)
+2025-04-27 17:58:24,297 - __main__ - INFO - Analyzing feature correlations
+2025-04-27 17:58:24,423 - __main__ - INFO - Preprocessing training data
+2025-04-27 17:58:25,138 - __main__ - INFO - Preprocessing test data
+2025-04-27 17:58:25,150 - __main__ - INFO - Processed training data shape: (5000, 10)
+2025-04-27 17:58:25,150 - __main__ - INFO - Processed test data shape: (2000, 10)
+2025-04-27 17:58:25,150 - __main__ - INFO - Saving processed data
+2025-04-27 17:58:25,213 - __main__ - INFO - Saving preprocessor
+2025-04-27 17:58:25,219 - __main__ - INFO - Preprocessing completed successfully
+2025-04-28 17:49:00,766 - __main__ - INFO - Starting preprocessing pipeline
+2025-04-28 17:49:00,766 - __main__ - INFO - Loading raw data
+2025-04-28 17:49:00,774 - __main__ - INFO - Analyzing training data
+2025-04-28 17:49:00,774 - __main__ - INFO - Dataset shape: (5000, 8)
+2025-04-28 17:49:00,777 - __main__ - INFO - Class distribution:
+readmitted
+0    4060
+1     940
+Name: count, dtype: int64
+2025-04-28 17:49:00,777 - __main__ - INFO - Class imbalance ratio: 4.32
+2025-04-28 17:49:00,965 - matplotlib.category - INFO - Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+2025-04-28 17:49:00,971 - matplotlib.category - INFO - Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+2025-04-28 17:49:01,049 - __main__ - INFO - Analyzing test data
+2025-04-28 17:49:01,049 - __main__ - INFO - Dataset shape: (2000, 7)
+2025-04-28 17:49:01,050 - __main__ - INFO - Analyzing feature correlations
+2025-04-28 17:49:01,170 - __main__ - INFO - Preprocessing training data
+2025-04-28 17:49:01,887 - __main__ - INFO - Preprocessing test data
+2025-04-28 17:49:01,900 - __main__ - INFO - Processed training data shape: (5000, 10)
+2025-04-28 17:49:01,900 - __main__ - INFO - Processed test data shape: (2000, 10)
+2025-04-28 17:49:01,900 - __main__ - INFO - Saving processed data
+2025-04-28 17:49:01,953 - __main__ - INFO - Balancing processed training data with SMOTE
+2025-04-28 17:49:02,033 - __main__ - INFO - Balanced train shape: (6496, 11), Balanced test shape: (1624, 11)
+2025-04-28 17:49:02,033 - __main__ - INFO - Saving preprocessor
+2025-04-28 17:49:02,038 - __main__ - INFO - Preprocessing completed successfully
+2025-04-28 17:54:17,654 - __main__ - INFO - Starting preprocessing pipeline
+2025-04-28 17:54:17,654 - __main__ - INFO - Loading raw data
+2025-04-28 17:54:17,663 - __main__ - INFO - Analyzing training data
+2025-04-28 17:54:17,664 - __main__ - INFO - Dataset shape: (5000, 8)
+2025-04-28 17:54:17,667 - __main__ - INFO - Class distribution:
+readmitted
+0    4060
+1     940
+Name: count, dtype: int64
+2025-04-28 17:54:17,667 - __main__ - INFO - Class imbalance ratio: 4.32
+2025-04-28 17:54:17,834 - matplotlib.category - INFO - Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+2025-04-28 17:54:17,840 - matplotlib.category - INFO - Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+2025-04-28 17:54:17,914 - __main__ - INFO - Analyzing test data
+2025-04-28 17:54:17,914 - __main__ - INFO - Dataset shape: (2000, 7)
+2025-04-28 17:54:17,915 - __main__ - INFO - Analyzing feature correlations
+2025-04-28 17:54:18,033 - __main__ - INFO - Preprocessing training data
+2025-04-28 17:54:18,732 - __main__ - INFO - Preprocessing test data
+2025-04-28 17:54:18,744 - __main__ - INFO - Processed training data shape: (5000, 10)
+2025-04-28 17:54:18,744 - __main__ - INFO - Processed test data shape: (2000, 10)
+2025-04-28 17:54:18,744 - __main__ - INFO - Saving processed data
+2025-04-28 17:54:18,805 - __main__ - INFO - Balancing processed training data with SMOTE
+2025-04-28 17:54:18,892 - __main__ - INFO - Balanced train shape: (6496, 11), Balanced test shape: (1624, 11)
+2025-04-28 17:54:18,892 - __main__ - INFO - Saving preprocessor
+2025-04-28 17:54:18,897 - __main__ - INFO - Preprocessing completed successfully

@@ -9,23 +9,27 @@ import sys
 from pathlib import Path
 import io
 import matplotlib.pyplot as plt
-from src.data.eda import load_raw, basic_stats, univariate_numeric, univariate_categorical, correlation_matrix, missing_heatmap, pairwise_plot, numeric_scatter_matrix, boxplot_numeric_by_target, countplot_cat_by_target, scatter_numeric_by_target
+import seaborn as sns
+from sklearn.decomposition import PCA
 
-# project root
 def get_root():
     return Path(__file__).parents[1]
 root = get_root()
 sys.path.insert(0, str(root))
 
+from src.data.eda import load_raw
+from src.data.preprocess import load_preprocessor, add_domain_features
+
 @st.cache_resource
 def load_models_and_data():
-    preprocessor = joblib.load(root / "data" / "processed" / "preprocessor.joblib")
-    logreg = joblib.load(root / "data" / "processed" / "logreg_model.joblib")
-    rf = joblib.load(root / "data" / "processed" / "rf_model.joblib")
+    preprocessor, _ = load_preprocessor(root / "data" / "processed" / "preprocessor.joblib")
+    logreg = joblib.load(root / "data" / "processed" / "logreg_model_best.joblib")
+    rf = joblib.load(root / "data" / "processed" / "rf_model_best.joblib")
+    xgb = joblib.load(root / "data" / "processed" / "xgboost_model_best.joblib")
     raw = pd.read_csv(root / "data" / "raw" / "train_df.csv")
-    return preprocessor, logreg, rf, raw
+    return preprocessor, logreg, rf, xgb, raw
 
-preprocessor, logreg_model, rf_model, raw_df = load_models_and_data()
+preprocessor, logreg_model, rf_model, xgb_model, raw_df = load_models_and_data()
 
 st.title("Hospital 30-Day Readmission Predictor")
 
@@ -34,54 +38,84 @@ page = st.sidebar.selectbox("Page", ["Predict", "Data Info"])
 
 if page == "Data Info":
     train, _ = load_raw()
-    st.header("Data Information")
-    st.subheader("Dataset Shape")
-    st.write(f"Rows: {train.shape[0]}, Columns: {train.shape[1]}")
-    buf = io.StringIO()
-    train.info(buf=buf)
-    st.text(buf.getvalue())
-    st.subheader("Descriptive Statistics")
-    st.dataframe(train.describe(include='all'))
-    st.subheader("Missing Values")
-    missing = train.isnull().sum()
-    st.bar_chart(missing)
-    st.subheader("Value Counts per Column")
-    for c in train.columns:
-        vc = train[c].value_counts(dropna=False)
-        st.write(f"**{c}**")
-        st.write(vc)
-        st.write(f"Sum of value counts: {vc.sum()}")
-    st.subheader("Univariate Numeric Plots")
-    num_cols = train.select_dtypes(include=['int64','float64']).columns.tolist()
-    num_cols = [c for c in num_cols if c!='readmitted']
-
-    def show_plots(func, *args, **kwargs):
-        """Run an EDA function and display all generated figures in Streamlit."""
-        before = set(plt.get_fignums())
-        func(*args, **kwargs)
-        after = set(plt.get_fignums())
-        new_figs = sorted(after - before)
-        for num in new_figs:
-            fig = plt.figure(num)
-            st.pyplot(fig)
-
-    show_plots(univariate_numeric, train, num_cols)
-    st.subheader("Univariate Categorical Plots")
-    show_plots(univariate_categorical, train, train.select_dtypes(include=['object','category']).columns.tolist())
-    st.subheader("Correlation Matrix")
-    show_plots(correlation_matrix, train, num_cols)
-    st.subheader("Missing Data Heatmap")
-    show_plots(missing_heatmap, train)
-    st.subheader("Pairwise Plot")
-    show_plots(pairwise_plot, train, num_cols)
-    st.subheader("Scatter Matrix")
-    show_plots(numeric_scatter_matrix, train, num_cols)
-    st.subheader("Boxplot Numeric by Target")
-    show_plots(boxplot_numeric_by_target, train, num_cols)
-    st.subheader("Countplot Categorical by Target")
-    show_plots(countplot_cat_by_target, train, train.select_dtypes(include=['object','category']).columns.tolist())
-    st.subheader("Scatter Numeric by Target")
-    show_plots(scatter_numeric_by_target, train, num_cols)
+    st.title("Exploratory Data Analysis")
+    # Data Description
+    st.header("First 5 Rows")
+    st.markdown(train.head().to_markdown(), unsafe_allow_html=True)
+    st.header("Column Data Types")
+    st.markdown(train.dtypes.to_frame(name="dtype").to_markdown(), unsafe_allow_html=True)
+    st.header("Summary Statistics")
+    st.markdown(train.describe(include='all').to_markdown(), unsafe_allow_html=True)
+    # Missing Value Heatmap
+    st.header("Missing Value Heatmap")
+    if train.isnull().values.any():
+        fig = plt.figure(figsize=(10,6))
+        sns.heatmap(train.isnull(), cbar=False)
+        st.pyplot(fig)
+    else:
+        st.write("No missing values in the dataset.")
+    # Class Distribution
+    st.header("Readmission Class Distribution")
+    fig = plt.figure(figsize=(6,4))
+    sns.countplot(x='readmitted', data=train, palette='Set2')
+    plt.title("Readmission Class Counts")
+    st.pyplot(fig)
+    # Univariate Analysis – Numeric Features
+    st.header("Univariate Analysis – Numeric Features")
+    num_cols = train.select_dtypes(include=['number']).columns.tolist()
+    if 'readmitted' in num_cols:
+        num_cols.remove('readmitted')
+    for col in num_cols:
+        st.subheader(f"{col} Distribution")
+        fig = plt.figure()
+        sns.histplot(train[col].dropna(), kde=True, color='skyblue')
+        st.pyplot(fig)
+        st.subheader(f"{col} Boxplot")
+        fig = plt.figure()
+        sns.boxplot(x=train[col].dropna(), color='lightcoral')
+        st.pyplot(fig)
+    # Univariate Analysis – Categorical Features
+    st.header("Univariate Analysis – Categorical Features")
+    cat_cols = train.select_dtypes(include=['object','category']).columns.tolist()
+    for col in cat_cols:
+        st.subheader(f"{col} Counts")
+        fig = plt.figure()
+        sns.countplot(x=col, data=train, palette='Set2')
+        st.pyplot(fig)
+    # Bivariate Analysis – Correlation Matrix
+    st.header("Correlation Matrix")
+    corr = train[num_cols].corr()
+    fig = plt.figure(figsize=(10,8))
+    sns.heatmap(corr, annot=True, fmt=".2f", cmap='coolwarm')
+    st.pyplot(fig)
+    # Bivariate Analysis – Numeric vs Readmission
+    st.header("Numeric Features by Readmission")
+    for col in num_cols:
+        st.subheader(f"{col} by Readmission")
+        fig = plt.figure()
+        sns.boxplot(x='readmitted', y=col, data=train, palette='Set2')
+        st.pyplot(fig)
+    # PCA – First Two Principal Components
+    st.header("PCA – First Two Principal Components")
+    pca = PCA(n_components=2)
+    comps = pca.fit_transform(train[num_cols].fillna(0))
+    fig = plt.figure()
+    sns.scatterplot(x=comps[:,0], y=comps[:,1], hue=train['readmitted'], palette='Set1')
+    plt.xlabel("PC1")
+    plt.ylabel("PC2")
+    st.pyplot(fig)
+    # Feature Importance – Random Forest Model
+    st.header("Feature Importance – Random Forest Model")
+    try:
+        feats = preprocessor.get_feature_names_out()
+    except:
+        feats = preprocessor.feature_names_in_
+    importances = rf_model.feature_importances_
+    imp_df = pd.DataFrame({'feature':feats, 'importance':importances})
+    imp_df = imp_df.sort_values('importance', ascending=False)
+    fig = plt.figure(figsize=(8,len(feats)*0.3))
+    sns.barplot(x='importance', y='feature', data=imp_df, palette='viridis')
+    st.pyplot(fig)
     st.stop()
 
 if page == "Predict":
@@ -107,11 +141,15 @@ if page == "Predict":
             'comorbidity_score': [comorbidity_score],
             'discharge_to': [discharge_to]
         })
+        # add derived features before preprocessing
+        input_df = add_domain_features(input_df)
         X_proc = preprocessor.transform(input_df)
         prob_lr = logreg_model.predict_proba(X_proc)[0]
         pred_lr = logreg_model.predict(X_proc)[0]
         prob_rf = rf_model.predict_proba(X_proc)[0]
         pred_rf = rf_model.predict(X_proc)[0]
+        prob_xgb = xgb_model.predict_proba(X_proc)[0,1]
+        pred_xgb = xgb_model.predict(X_proc)[0]
 
         st.subheader("Prediction Results")
         st.write("**Logistic Regression**")
@@ -120,8 +158,10 @@ if page == "Predict":
         st.write("**Random Forest**")
         st.write(f"Readmitted: {'Yes' if pred_rf==1 else 'No'}")
         st.write(f"Probability: {prob_rf:.2f}")
+        st.write("**XGBoost**")
+        st.write(f"Readmitted: {'Yes' if pred_xgb==1 else 'No'}")
+        st.write(f"Probability: {prob_xgb:.2f}")
 
-# Display hold-out metrics
-st.sidebar.header("Hold-out Performance")
-st.sidebar.metric("LR ROC-AUC", "0.5447")
-st.sidebar.metric("RF ROC-AUC", "0.5920")
+# Display hold-out metrics (from evaluation reports if needed)
+# st.sidebar.header("Hold-out Performance")
+# ... metrics loaded dynamically or view reports/figures
