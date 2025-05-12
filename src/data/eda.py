@@ -24,7 +24,6 @@ os.makedirs(FIGURES_DIR, exist_ok=True)
 
 
 def load_raw():
-    """Load raw train and test data."""
     raw_dir = os.path.join(ROOT, "data", "raw")
     train = pd.read_csv(os.path.join(raw_dir, "train_df.csv"))
     test = pd.read_csv(os.path.join(raw_dir, "test_df.csv"))
@@ -77,7 +76,6 @@ def basic_stats(df, save_to=None):
 
 
 def class_imbalance_analysis(df, target='readmitted'):
-    """Analyze and visualize class imbalance in the target variable."""
     print("\n=== Class Imbalance Analysis ===")
     class_counts = df[target].value_counts()
     class_pcts = df[target].value_counts(normalize=True) * 100
@@ -515,8 +513,6 @@ def outlier_analysis(df, numeric_cols=None, target='readmitted', method='iqr'):
 
 
 def pca_analysis(df, target='readmitted'):
-    """PCA analysis for dimensionality reduction and clustering tendencies."""
-    # Select numeric columns
     numeric_cols = df.select_dtypes(include=['number']).columns.tolist()
     if target in numeric_cols:
         numeric_cols.remove(target)
@@ -608,7 +604,6 @@ def pca_analysis(df, target='readmitted'):
 
 
 def missing_value_analysis(df):
-    """Enhanced missing value analysis with patterns and impact on target."""
     missing = df.isnull().sum()
     missing = missing[missing > 0].sort_values(ascending=False)
     
@@ -678,7 +673,6 @@ def missing_value_analysis(df):
 
 
 def data_leakage_detection(df, target='readmitted'):
-    """Detect potential data leakage issues."""
     print("\n=== Data Leakage Detection ===")
     
     # Get data without target
@@ -739,7 +733,6 @@ def data_leakage_detection(df, target='readmitted'):
 
 
 def main():
-    """Run the full EDA pipeline with enhanced analysis."""
     print("=== Enhanced EDA for Hospital Readmission Prediction ===")
     
     # Load data

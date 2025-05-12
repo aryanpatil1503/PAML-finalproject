@@ -1,8 +1,3 @@
-#!/usr/bin/env python3
-"""
-Enhanced evaluation script for hospital readmission prediction models.
-Provides comprehensive metrics, visualizations, and sensitivity analysis.
-"""
 import sys
 from pathlib import Path
 import pandas as pd
@@ -91,7 +86,6 @@ def plot_precision_recall_curve(y_true, y_probs, model_names, save_path=None):
 
 
 def threshold_sensitivity_analysis(y_true, y_prob, model_name, save_path=None):
-    """Analyze how different thresholds affect model performance metrics."""
     thresholds = np.linspace(0.1, 0.9, 41)
     metrics = {
         'threshold': thresholds,

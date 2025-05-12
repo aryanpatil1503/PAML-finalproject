@@ -1,8 +1,3 @@
-#!/usr/bin/env python3
-"""
-Enhanced preprocessing runner script for hospital readmission prediction.
-This script performs feature engineering, preprocessing, and prepares data for modeling.
-"""
 import sys
 import logging
 from pathlib import Path
@@ -41,7 +36,6 @@ for dir_path in [processed_dir, figures_dir]:
     dir_path.mkdir(parents=True, exist_ok=True)
 
 def analyze_data(df, target_col=None):
-    """Analyze dataset and output basic statistics."""
     logger.info(f"Dataset shape: {df.shape}")
     
     # Check for missing values

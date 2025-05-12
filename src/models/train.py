@@ -1,8 +1,3 @@
-#!/usr/bin/env python3
-"""
-Enhanced training script for hospital readmission prediction models.
-Incorporates improved implementations and evaluation techniques.
-"""
 import sys
 from pathlib import Path
 import pandas as pd
@@ -28,7 +23,6 @@ from src.models.random_forest import RandomForestScratch
 from src.models.xgboost_scratch import XGBoostScratch
 
 def optimize_threshold(model, X, y, metric='f1'):
-    """Find optimal decision threshold based on chosen metric."""
     y_prob = model.predict_proba(X)
     best_metric_value = 0
     best_threshold = 0.5

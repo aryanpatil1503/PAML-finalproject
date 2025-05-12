@@ -1,7 +1,3 @@
-#!/usr/bin/env python3
-"""
-Streamlit app for 30-day hospital readmission prediction.
-"""
 import streamlit as st
 import pandas as pd
 import joblib
@@ -162,6 +158,3 @@ if page == "Predict":
         st.write(f"Readmitted: {'Yes' if pred_xgb==1 else 'No'}")
         st.write(f"Probability: {prob_xgb:.2f}")
 
-# Display hold-out metrics (from evaluation reports if needed)
-# st.sidebar.header("Hold-out Performance")
-# ... metrics loaded dynamically or view reports/figures

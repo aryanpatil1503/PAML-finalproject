@@ -1,7 +1,3 @@
-"""
-Simple XGBoost-like gradient boosting implementation for binary classification.
-Uses regression trees for pseudo-residual fitting.
-"""
 import numpy as np
 from sklearn.tree import DecisionTreeRegressor
 
@@ -10,25 +6,6 @@ def _sigmoid(x):
     return 1.0 / (1.0 + np.exp(-x))
 
 class XGBoostScratch:
-    """
-    Basic gradient boosting classifier for binary targets.
-    Parameters:
-    -----------
-    n_estimators : int
-        Number of boosting rounds
-    learning_rate : float
-        Shrinkage factor for tree updates
-    max_depth : int
-        Maximum depth of each regression tree
-    min_samples_split : int
-        Minimum samples needed to split
-    min_samples_leaf : int
-        Minimum samples in leaf nodes
-    subsample : float
-        Fraction of samples to use for fitting each tree
-    random_state : int or None
-        Random seed for reproducibility
-    """
     def __init__(self,
                  n_estimators=100,
                  learning_rate=0.1,

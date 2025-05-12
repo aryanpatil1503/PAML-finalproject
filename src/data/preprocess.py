@@ -1,7 +1,3 @@
-"""
-Enhanced preprocessing module: advanced imputation, encoding, and feature engineering pipeline 
-for hospital readmission prediction.
-"""
 import os
 import pandas as pd
 import numpy as np
@@ -20,29 +16,6 @@ def build_preprocessing_pipeline(numerical_features, categorical_features,
                                  scaler_type='robust', imputer_type='knn',
                                  categorical_encoder='onehot', feature_selection=None,
                                  selection_k=10, add_interactions=True):
-    """
-    Construct an enhanced preprocessing pipeline for hospital readmission prediction.
-    
-    Parameters:
-    -----------
-    numerical_features : list
-        List of numerical feature column names
-    categorical_features : list
-        List of categorical feature column names
-    scaler_type : str, default='robust'
-        Type of scaler to use ('standard', 'robust', 'power')
-    imputer_type : str, default='knn'
-        Type of imputer to use for numerical features ('median', 'mean', 'knn')
-    categorical_encoder : str, default='onehot'
-        Type of encoder for categorical features ('onehot', 'ordinal')
-    feature_selection : str, default=None
-        Feature selection method ('mutual_info' or None)
-    selection_k : int, default=10
-        Number of top features to select if using feature selection
-    add_interactions : bool, default=True
-        Whether to add polynomial interactions between features
-    """
-    # Initialize transformers list
     transformers = []
     
     # Build numerical pipeline
@@ -108,27 +81,6 @@ def preprocess(df: pd.DataFrame,
                preprocessor=None,
                fit: bool = True,
                **kwargs):
-    """
-    Apply preprocessing to DataFrame with enhanced options for readmission prediction.
-    
-    Parameters:
-    -----------
-    df : pd.DataFrame
-        Input dataframe
-    numerical_features : list
-        List of numerical feature column names
-    categorical_features : list
-        List of numerical feature column names
-    target_column : str, default=None
-        Target column name, required for target encoding
-    preprocessor : object, default=None
-        Pre-fitted preprocessor
-    fit : bool, default=True
-        Whether to fit the preprocessor
-    **kwargs : dict
-        Additional arguments for build_preprocessing_pipeline
-    """
-    # Copy input feature lists to avoid side-effects across calls
     numerical_features = list(numerical_features)
     categorical_features = list(categorical_features)
     # Check for missing columns
@@ -190,12 +142,6 @@ def preprocess(df: pd.DataFrame,
 
 
 def add_domain_features(df):
-    """
-    Add domain-specific features for hospital readmission prediction.
-    
-    This function creates new features based on domain knowledge that are likely 
-    to be predictive for hospital readmission.
-    """
     df = df.copy()
     
     # Create comorbidity-related features
@@ -233,18 +179,6 @@ def add_domain_features(df):
 
 
 def save_preprocessor(preprocessor, save_path: str, feature_names=None):
-    """
-    Save fitted preprocessor and metadata to disk.
-    
-    Parameters:
-    -----------
-    preprocessor : object
-        Fitted preprocessor
-    save_path : str
-        Path to save the preprocessor
-    feature_names : list, default=None
-        Names of features used in preprocessing
-    """
     os.makedirs(os.path.dirname(save_path), exist_ok=True)
     
     # Save preprocessor with metadata
@@ -256,21 +190,6 @@ def save_preprocessor(preprocessor, save_path: str, feature_names=None):
 
 
 def load_preprocessor(load_path: str):
-    """
-    Load preprocessor from disk with metadata.
-    
-    Parameters:
-    -----------
-    load_path : str
-        Path to the saved preprocessor
-    
-    Returns:
-    --------
-    preprocessor : object
-        The loaded preprocessor
-    metadata : dict
-        Metadata associated with the preprocessor
-    """
     loaded = joblib.load(load_path)
     
     if isinstance(loaded, dict) and 'preprocessor' in loaded:

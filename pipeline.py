@@ -1,8 +1,3 @@
-#!/usr/bin/env python3
-"""
-Full pipeline orchestrator for hospital readmission project.
-Calls preprocessing, EDA, model training with hyperparameter tuning, and evaluation in sequence.
-"""
 import subprocess
 import sys
 from pathlib import Path
